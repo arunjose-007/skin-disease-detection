@@ -411,6 +411,8 @@ def serve_static(filename):
     return jsonify({"error": f"File '{filename}' not found"}), 404
 
 
+@app.route("/api")
+@app.route("/api/index")
 @app.route("/api/status")
 @app.route("/api/health")
 def status():

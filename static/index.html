@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DermAI — Advanced Skin Disease Detection</title>
+  <meta name="description" content="AI-powered skin disease detection using CNN and SVM models. Identify melanoma, carcinoma, and 7+ conditions with severity and stage analysis." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ═══════════════════ NAVBAR ═══════════════════ -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="18" stroke="url(#g1)" stroke-width="2.5"/><path d="M12 20 C12 14 16 10 20 10 C24 10 28 14 28 20 C28 26 24 30 20 30 C16 30 12 26 12 20Z" fill="url(#g2)" opacity="0.7"/><circle cx="20" cy="20" r="4" fill="#00E5FF"/><defs><linearGradient id="g1" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#00E5FF"/><stop offset="1" stop-color="#A855F7"/></linearGradient><linearGradient id="g2" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#00E5FF" stop-opacity="0.3"/><stop offset="1" stop-color="#A855F7" stop-opacity="0.3"/></linearGradient></defs></svg>
+      </div>
+      <span class="brand-name">Derm<span class="brand-accent">AI</span></span>
+    </div>
+    <div class="nav-links">
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#analyzer" class="nav-link">Analyzer</a>
+      <a href="#diseases" class="nav-link">Diseases</a>
+      <a href="#about" class="nav-link">About</a>
+    </div>
+    <div class="nav-status" id="navStatus">
+      <span class="status-dot"></span>
+      <span class="status-text">Connecting...</span>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="hero_bg.jpg" alt="AI Medical Analysis" class="hero-img" />
+      <div class="hero-overlay"></div>
+      <div class="hero-particles" id="particles"></div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="badge-pulse"></span>
+        <span>AI-Powered Dermatology</span>
+      </div>
+      <h1 class="hero-title">
+        Skin Disease<br/>
+        <span class="gradient-text">Detection & Analysis</span>
+      </h1>
+      <p class="hero-subtitle">
+        Advanced CNN + SVM ensemble model trained on 1000+ dermatoscopic images.
+        Identify <strong>7 disease categories</strong>, severity levels, and clinical stages in seconds.
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-num">7+</span>
+          <span class="stat-label">Disease Types</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">CNN</span>
+          <span class="stat-label">Deep Learning</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">SVM</span>
+          <span class="stat-label">Ensemble Model</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num">4</span>
+          <span class="stat-label">Severity Levels</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="scrollToAnalyzer()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M20.188 10.934c.2.68.312 1.36.312 2.066s-.112 1.386-.312 2.066l2.154 1.623a11.026 11.026 0 000-7.378l-2.154 1.623zM17.657 4.343l-1.623 2.154A8.978 8.978 0 0012 4.998a8.978 8.978 0 00-4.034 1.499L6.343 4.343a11 11 0 019.314 0zM4.343 6.343L5.966 8.497A8.978 8.978 0 004.998 12c0 1.42.33 2.76.968 3.959L3.812 17.582a11 11 0 010-11.24z"/></svg>
+          Analyze My Skin
+        </button>
+        <button class="btn-secondary" onclick="document.getElementById('cam-btn').click()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          Use Camera
+        </button>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <div class="scroll-mouse"></div>
+      <span>Scroll to analyze</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ANALYZER ═══════════════════ -->
+  <section class="analyzer-section" id="analyzer">
+    <div class="section-header">
+      <div class="section-badge">🔬 AI Analysis Engine</div>
+      <h2 class="section-title">Skin Disease <span class="gradient-text">Analyzer</span></h2>
+      <p class="section-subtitle">Upload a skin lesion photo or use your camera for real-time AI analysis</p>
+    </div>
+
+    <div class="analyzer-container">
+      <!-- ── Upload Panel ── -->
+      <div class="upload-panel" id="uploadPanel">
+        <!-- Tabs -->
+        <div class="input-tabs">
+          <button class="tab-btn active" id="tab-upload" onclick="switchTab('upload')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            Upload Image
+          </button>
+          <button class="tab-btn" id="tab-camera" onclick="switchTab('camera')" id="cam-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            Live Camera
+          </button>
+        </div>
+
+        <!-- Upload Tab Content -->
+        <div class="tab-content active" id="content-upload">
+          <div class="drop-zone" id="dropZone" ondragover="handleDragOver(event)" ondrop="handleDrop(event)" ondragleave="handleDragLeave(event)" onclick="document.getElementById('fileInput').click()">
+            <div class="drop-icon">
+              <svg viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="38" stroke="url(#dg)" stroke-width="2" stroke-dasharray="6 4"/>
+                <path d="M40 52V30M30 40l10-10 10 10" stroke="url(#dg2)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="40" cy="58" r="3" fill="#00E5FF"/>
+                <defs>
+                  <linearGradient id="dg" x1="0" y1="0" x2="80" y2="80"><stop stop-color="#00E5FF"/><stop offset="1" stop-color="#A855F7"/></linearGradient>
+                  <linearGradient id="dg2" x1="0" y1="0" x2="80" y2="80"><stop stop-color="#00E5FF"/><stop offset="1" stop-color="#A855F7"/></linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <p class="drop-title">Drop image here</p>
+            <p class="drop-sub">or click to browse</p>
+            <p class="drop-hint">JPG, PNG, WEBP • Max 10MB</p>
+            <div class="drop-highlight-ring"></div>
+          </div>
+          <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleFileSelect(event)" />
+
+          <!-- Preview -->
+          <div class="image-preview" id="imagePreview" style="display:none">
+            <img id="previewImg" src="" alt="Preview" />
+            <button class="remove-btn" onclick="clearImage()">✕ Remove</button>
+          </div>
+        </div>
+
+        <!-- Camera Tab Content -->
+        <div class="tab-content" id="content-camera">
+          <div class="camera-wrapper">
+            <div class="camera-frame" id="cameraFrame">
+              <video id="videoStream" autoplay playsinline muted></video>
+              <div class="scan-line"></div>
+              <div class="camera-corners">
+                <span class="corner tl"></span><span class="corner tr"></span>
+                <span class="corner bl"></span><span class="corner br"></span>
+              </div>
+              <div class="camera-overlay-text">Position lesion in frame</div>
+            </div>
+            <div class="camera-controls">
+              <button class="cam-control-btn" id="startCamBtn" onclick="startCamera()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+                Start Camera
+              </button>
+              <button class="cam-control-btn capture-btn" id="captureBtn" onclick="captureFrame()" disabled>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4" fill="currentColor"/></svg>
+                Capture
+              </button>
+              <button class="cam-control-btn danger-btn" id="stopCamBtn" onclick="stopCamera()" style="display:none">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+                Stop
+              </button>
+            </div>
+            <canvas id="captureCanvas" style="display:none"></canvas>
+
+            <!-- Captured Preview -->
+            <div class="image-preview" id="camPreview" style="display:none">
+              <img id="camPreviewImg" src="" alt="Captured frame" />
+              <button class="remove-btn" onclick="clearCamPreview()">✕ Retake</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Analyze Button -->
+        <button class="analyze-btn" id="analyzeBtn" onclick="analyzeImage()" disabled>
+          <div class="btn-content">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+            <span>Analyze with AI</span>
+          </div>
+          <div class="btn-loader" style="display:none">
+            <div class="spinner"></div>
+            <span>Analyzing...</span>
+          </div>
+        </button>
+      </div>
+
+      <!-- ── Results Panel ── -->
+      <div class="results-panel" id="resultsPanel">
+        <!-- Empty State -->
+        <div class="results-empty" id="resultsEmpty">
+          <div class="empty-animation">
+            <div class="empty-ring ring1"></div>
+            <div class="empty-ring ring2"></div>
+            <div class="empty-ring ring3"></div>
+            <div class="empty-icon">🔬</div>
+          </div>
+          <h3>Ready to Analyze</h3>
+          <p>Upload or capture a skin image to begin AI-powered analysis</p>
+          <div class="feature-pills">
+            <span class="pill">✓ Disease Detection</span>
+            <span class="pill">✓ Severity Assessment</span>
+            <span class="pill">✓ Stage Classification</span>
+            <span class="pill">✓ Treatment Guide</span>
+          </div>
+        </div>
+
+        <!-- Loading State -->
+        <div class="results-loading" id="resultsLoading" style="display:none">
+          <div class="loading-animation">
+            <div class="dna-helix">
+              <div class="strand s1"></div>
+              <div class="strand s2"></div>
+              <div class="strand s3"></div>
+              <div class="strand s4"></div>
+              <div class="strand s5"></div>
+              <div class="strand s6"></div>
+            </div>
+          </div>
+          <h3>AI Analysis in Progress</h3>
+          <div class="loading-steps">
+            <div class="load-step active" id="step1">🧠 CNN Processing...</div>
+            <div class="load-step" id="step2">🤖 SVM Classification...</div>
+            <div class="load-step" id="step3">📊 Computing Severity...</div>
+            <div class="load-step" id="step4">✅ Generating Report...</div>
+          </div>
+        </div>
+
+        <!-- Results Content -->
+        <div class="results-content" id="resultsContent" style="display:none">
+          <!-- Primary Diagnosis -->
+          <div class="result-card primary-card" id="primaryCard">
+            <div class="card-header">
+              <div class="diagnosis-badge" id="diagnosisBadge"></div>
+              <div class="confidence-ring">
+                <svg class="ring-svg" viewBox="0 0 80 80">
+                  <circle cx="40" cy="40" r="32" fill="none" stroke="#1a2040" stroke-width="8"/>
+                  <circle cx="40" cy="40" r="32" fill="none" stroke="url(#confGrad)" stroke-width="8"
+                    stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201"
+                    id="confRing" transform="rotate(-90 40 40)"/>
+                  <defs><linearGradient id="confGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#00E5FF"/>
+                    <stop offset="100%" stop-color="#A855F7"/>
+                  </linearGradient></defs>
+                </svg>
+                <div class="ring-text">
+                  <span class="ring-num" id="confNum">0%</span>
+                  <span class="ring-label">Confidence</span>
+                </div>
+              </div>
+            </div>
+            <div class="diagnosis-name" id="diagnosisName"></div>
+            <div class="diagnosis-desc" id="diagnosisDesc"></div>
+            <div class="risk-badge" id="riskBadge"></div>
+            <div class="urgency-notice" id="urgencyNotice"></div>
+          </div>
+
+          <!-- Severity & Stage -->
+          <div class="result-row">
+            <div class="result-card severity-card">
+              <h4>Severity Level</h4>
+              <div class="severity-meter">
+                <div class="severity-label" id="severityLabel">—</div>
+                <div class="severity-track">
+                  <div class="severity-fill" id="severityFill"></div>
+                  <div class="severity-glow" id="severityGlow"></div>
+                </div>
+                <div class="severity-pct" id="severityPct">0%</div>
+              </div>
+              <div class="severity-levels">
+                <span class="sev-level mild">Mild</span>
+                <span class="sev-level moderate">Moderate</span>
+                <span class="sev-level severe">Severe</span>
+                <span class="sev-level critical">Critical</span>
+              </div>
+            </div>
+
+            <div class="result-card stage-card">
+              <h4>Clinical Stage</h4>
+              <div class="stage-display" id="stageDisplay">
+                <div class="stage-name" id="stageName"></div>
+                <div class="stage-desc" id="stageDesc"></div>
+                <div class="stage-survival" id="stageSurvival"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Symptoms & Treatments -->
+          <div class="result-row">
+            <div class="result-card symptoms-card">
+              <h4>🩺 Key Symptoms</h4>
+              <ul class="symptom-list" id="symptomList"></ul>
+            </div>
+            <div class="result-card treatment-card">
+              <h4>💊 Treatment Options</h4>
+              <ul class="treatment-list" id="treatmentList"></ul>
+            </div>
+          </div>
+
+          <!-- Prevention -->
+          <div class="result-card prevention-card">
+            <h4>🛡️ Prevention & Care</h4>
+            <div class="prevention-list" id="preventionList"></div>
+          </div>
+
+          <!-- All Predictions Breakdown -->
+          <div class="result-card predictions-card">
+            <h4>📊 Prediction Breakdown (Top 5)</h4>
+            <div class="predictions-list" id="predictionsList"></div>
+          </div>
+
+          <!-- Disclaimer -->
+          <div class="disclaimer-box" id="disclaimerBox">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <p id="disclaimerText"></p>
+          </div>
+
+          <!-- New Analysis Button -->
+          <button class="new-analysis-btn" onclick="resetAnalysis()">
+            🔄 Analyze Another Image
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ DISEASES ═══════════════════ -->
+  <section class="diseases-section" id="diseases">
+    <div class="section-header">
+      <div class="section-badge">📚 Knowledge Base</div>
+      <h2 class="section-title">Detectable <span class="gradient-text">Skin Conditions</span></h2>
+      <p class="section-subtitle">Our AI model is trained to identify these 7 skin conditions with high accuracy</p>
+    </div>
+    <div class="diseases-grid" id="diseasesGrid">
+      <!-- Populated via JS -->
+    </div>
+  </section>
+
+  <!-- ═══════════════════ ABOUT ═══════════════════ -->
+  <section class="about-section" id="about">
+    <div class="section-header">
+      <div class="section-badge">🧬 Technology</div>
+      <h2 class="section-title">How Our <span class="gradient-text">AI Works</span></h2>
+    </div>
+    <div class="tech-grid">
+      <div class="tech-card">
+        <div class="tech-icon cnn-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <rect x="5" y="5" width="50" height="50" rx="8" stroke="#00E5FF" stroke-width="2"/>
+            <rect x="15" y="15" width="30" height="30" rx="4" fill="#00E5FF" fill-opacity="0.1"/>
+            <path d="M20 30h20M30 20v20" stroke="#00E5FF" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="30" cy="30" r="5" fill="#00E5FF" fill-opacity="0.3"/>
+          </svg>
+        </div>
+        <h3>Convolutional Neural Network</h3>
+        <p>4-block deep CNN with batch normalization, dropout regularization, and data augmentation. Learns spatial features directly from dermatoscopic images.</p>
+        <div class="tech-specs">
+          <span>128×128 input</span>
+          <span>256-dim features</span>
+          <span>7 output classes</span>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon svm-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <circle cx="30" cy="30" r="25" stroke="#A855F7" stroke-width="2"/>
+            <path d="M10 30 Q30 10 50 30 Q30 50 10 30Z" fill="#A855F7" fill-opacity="0.1"/>
+            <circle cx="20" cy="25" r="3" fill="#A855F7"/>
+            <circle cx="40" cy="35" r="3" fill="#00E5FF"/>
+            <line x1="15" y1="20" x2="45" y2="40" stroke="#A855F7" stroke-width="2" stroke-dasharray="4 2"/>
+          </svg>
+        </div>
+        <h3>Support Vector Machine</h3>
+        <p>RBF-kernel SVM trained on CNN-extracted features. Provides complementary classification with class-weighted training for imbalanced datasets.</p>
+        <div class="tech-specs">
+          <span>RBF kernel</span>
+          <span>StandardScaler</span>
+          <span>Probability calibration</span>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon ensemble-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <path d="M30 8L50 22V38L30 52L10 38V22L30 8Z" stroke="url(#eg)" stroke-width="2" fill="url(#egf)"/>
+            <circle cx="30" cy="30" r="8" fill="#00E5FF" fill-opacity="0.4"/>
+            <defs>
+              <linearGradient id="eg" x1="0" y1="0" x2="60" y2="60"><stop stop-color="#00E5FF"/><stop offset="1" stop-color="#A855F7"/></linearGradient>
+              <linearGradient id="egf" x1="0" y1="0" x2="60" y2="60"><stop stop-color="#00E5FF" stop-opacity="0.05"/><stop offset="1" stop-color="#A855F7" stop-opacity="0.05"/></linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h3>Ensemble Prediction</h3>
+        <p>Weighted ensemble combining CNN (60%) and SVM (40%) predictions for superior accuracy. Severity and stage determination from clinical mapping rules.</p>
+        <div class="tech-specs">
+          <span>60% CNN weight</span>
+          <span>40% SVM weight</span>
+          <span>4 severity levels</span>
+        </div>
+      </div>
+      <div class="tech-card">
+        <div class="tech-icon data-icon">
+          <svg viewBox="0 0 60 60" fill="none">
+            <ellipse cx="30" cy="20" rx="22" ry="10" stroke="#22C55E" stroke-width="2"/>
+            <path d="M8 20v10c0 5.5 9.8 10 22 10s22-4.5 22-10V20" stroke="#22C55E" stroke-width="2"/>
+            <path d="M8 30v10c0 5.5 9.8 10 22 10s22-4.5 22-10V30" stroke="#22C55E" stroke-width="2"/>
+          </svg>
+        </div>
+        <h3>Training Dataset</h3>
+        <p>Trained on 1000+ dermatoscopic images from 7 disease classes with extensive data augmentation including rotation, flipping, zoom, and brightness variation.</p>
+        <div class="tech-specs">
+          <span>1050+ images</span>
+          <span>7 classes</span>
+          <span>80/20 train-val split</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pipeline Diagram -->
+    <div class="pipeline">
+      <div class="pipeline-step">
+        <div class="pipeline-icon">📷</div>
+        <div class="pipeline-label">Image Input</div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <div class="pipeline-icon">⚙️</div>
+        <div class="pipeline-label">Preprocessing</div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <div class="pipeline-icon">🧠</div>
+        <div class="pipeline-label">CNN Features</div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <div class="pipeline-icon">🤖</div>
+        <div class="pipeline-label">SVM + Ensemble</div>
+      </div>
+      <div class="pipeline-arrow">→</div>
+      <div class="pipeline-step">
+        <div class="pipeline-icon">📊</div>
+        <div class="pipeline-label">Diagnosis Report</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="footer">
+    <div class="footer-brand">
+      <span class="brand-name">Derm<span class="brand-accent">AI</span></span>
+      <p>AI-powered dermatology assistant for educational purposes</p>
+    </div>
+    <div class="footer-disclaimer">
+      ⚠️ This tool is for <strong>educational purposes only</strong> and does not replace professional medical advice.
+      Always consult a qualified dermatologist for diagnosis and treatment.
+    </div>
+    <div class="footer-copy">© 2024 DermAI · Built with CNN + SVM · Python + Flask + TensorFlow</div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

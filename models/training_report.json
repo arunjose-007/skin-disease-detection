@@ -1,0 +1,27 @@
+{
+  "svm_accuracy": 0.9619047619047619,
+  "neural_cnn_accuracy": 0.9571428571428572,
+  "ensemble_accuracy": 0.9619047619047619,
+  "total_samples": 1050,
+  "train_samples": 840,
+  "val_samples": 210,
+  "classes": [
+    "mel",
+    "nv",
+    "bcc",
+    "akiec",
+    "bkl",
+    "df",
+    "vasc"
+  ],
+  "class_names": {
+    "mel": "Melanoma",
+    "nv": "Melanocytic Nevi",
+    "bcc": "Basal Cell Carcinoma",
+    "akiec": "Actinic Keratosis",
+    "bkl": "Benign Keratosis",
+    "df": "Dermatofibroma",
+    "vasc": "Vascular Lesion"
+  },
+  "tensorflow_cnn_trained": false
+}

@@ -1,0 +1,223 @@
+{
+  "mel": {
+    "name": "Melanoma",
+    "description": "A serious form of skin cancer that begins in melanocytes (pigment-producing cells).",
+    "stages": [
+      "Stage I: Thin, localized",
+      "Stage II: Thicker, no spread",
+      "Stage III: Lymph node involvement",
+      "Stage IV: Distant metastasis"
+    ],
+    "severity_range": {
+      "low": [
+        0.0,
+        0.3
+      ],
+      "moderate": [
+        0.3,
+        0.6
+      ],
+      "high": [
+        0.6,
+        0.8
+      ],
+      "critical": [
+        0.8,
+        1.0
+      ]
+    },
+    "treatments": [
+      "Surgical excision",
+      "Immunotherapy",
+      "Targeted therapy",
+      "Radiation therapy"
+    ],
+    "color": "#FF4D4D"
+  },
+  "nv": {
+    "name": "Melanocytic Nevi",
+    "description": "Common benign skin growths (moles) composed of melanocytes.",
+    "stages": [
+      "Congenital",
+      "Junctional",
+      "Compound",
+      "Intradermal"
+    ],
+    "severity_range": {
+      "low": [
+        0.0,
+        0.5
+      ],
+      "moderate": [
+        0.5,
+        0.7
+      ],
+      "high": [
+        0.7,
+        0.9
+      ],
+      "critical": [
+        0.9,
+        1.0
+      ]
+    },
+    "treatments": [
+      "Monitoring",
+      "Excision if suspicious",
+      "Dermoscopy follow-up"
+    ],
+    "color": "#4DBBFF"
+  },
+  "bcc": {
+    "name": "Basal Cell Carcinoma",
+    "description": "The most common type of skin cancer arising from basal cells in the epidermis.",
+    "stages": [
+      "Superficial",
+      "Nodular",
+      "Infiltrative",
+      "Advanced"
+    ],
+    "severity_range": {
+      "low": [
+        0.0,
+        0.25
+      ],
+      "moderate": [
+        0.25,
+        0.5
+      ],
+      "high": [
+        0.5,
+        0.75
+      ],
+      "critical": [
+        0.75,
+        1.0
+      ]
+    },
+    "treatments": [
+      "Mohs surgery",
+      "Cryotherapy",
+      "Radiation",
+      "Targeted therapy"
+    ],
+    "color": "#FF9900"
+  },
+  "akiec": {
+    "name": "Actinic Keratosis",
+    "description": "Rough, scaly patches from years of sun exposure; precancerous lesion.",
+    "stages": [
+      "Grade I: Mild",
+      "Grade II: Moderate",
+      "Grade III: Severe dysplasia"
+    ],
+    "severity_range": {
+      "low": [
+        0.0,
+        0.33
+      ],
+      "moderate": [
+        0.33,
+        0.66
+      ],
+      "high": [
+        0.66,
+        1.0
+      ]
+    },
+    "treatments": [
+      "Cryotherapy",
+      "Topical fluorouracil",
+      "Photodynamic therapy",
+      "Laser resurfacing"
+    ],
+    "color": "#FFDD00"
+  },
+  "bkl": {
+    "name": "Benign Keratosis",
+    "description": "Non-cancerous skin lesions including seborrheic keratoses and lichen planus.",
+    "stages": [
+      "Early",
+      "Intermediate",
+      "Advanced"
+    ],
+    "severity_range": {
+      "low": [
+        0.0,
+        0.4
+      ],
+      "moderate": [
+        0.4,
+        0.7
+      ],
+      "high": [
+        0.7,
+        1.0
+      ]
+    },
+    "treatments": [
+      "Observation",
+      "Cryotherapy",
+      "Curettage",
+      "Laser removal"
+    ],
+    "color": "#00CC88"
+  },
+  "df": {
+    "name": "Dermatofibroma",
+    "description": "A common benign skin growth composed of fibrous tissue.",
+    "stages": [
+      "Single lesion",
+      "Multiple lesions"
+    ],
+    "severity_range": {
+      "low": [
+        0.0,
+        0.5
+      ],
+      "moderate": [
+        0.5,
+        0.8
+      ],
+      "high": [
+        0.8,
+        1.0
+      ]
+    },
+    "treatments": [
+      "Observation (usually harmless)",
+      "Surgical excision if symptomatic"
+    ],
+    "color": "#AA44FF"
+  },
+  "vasc": {
+    "name": "Vascular Lesion",
+    "description": "Abnormalities of blood vessels including angiomas and pyogenic granulomas.",
+    "stages": [
+      "Superficial",
+      "Deep",
+      "Extensive"
+    ],
+    "severity_range": {
+      "low": [
+        0.0,
+        0.4
+      ],
+      "moderate": [
+        0.4,
+        0.7
+      ],
+      "high": [
+        0.7,
+        1.0
+      ]
+    },
+    "treatments": [
+      "Laser therapy",
+      "Sclerotherapy",
+      "Surgical removal",
+      "Electrocautery"
+    ],
+    "color": "#FF6699"
+  }
+}
